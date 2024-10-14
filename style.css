@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1E90FF; /* BJJ blue */
+    text-align: center;
+    color: #fff; /* White text */
+}
+
+h1 {
+    color: #FFD700; /* BJJ yellow */
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 2px solid #32CD32; /* BJJ green for table borders */
+}
+
+th, td {
+    padding: 12px;
+    text-align: center; /* Center text in cells */
+}
+
+th {
+    background-color: #32CD32; /* Green headers */
+    color: #fff;
+}
+
+/* Corrected classes for belt colors */
+.belt-black-belt {
+    background-color: black;
+    color: white;
+}
+
+.belt-red-belt {
+    background-color: red;
+    color: white;
+}
+
+.belt-coral-belt {
+    background-color: coral;
+    color: white;
+}
