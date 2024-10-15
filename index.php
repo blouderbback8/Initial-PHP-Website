@@ -26,9 +26,6 @@
     <label for="ageFilter">Filter by Age:</label>
     <input type="number" id="ageFilter" placeholder="Enter age" onkeyup="filterByAge()">
 
-    <label for="locationFilter">Filter by Location:</label>
-    <input type="text" id="locationFilter" placeholder="Enter location" onkeyup="filterByLocation()">
-
     <!-- Table to display BJJ fighters -->
     <table id="fighterTable">
         <thead>
@@ -37,7 +34,6 @@
                 <th>Name</th>
                 <th>Belt Rank</th>
                 <th>Age</th>
-                <th>Location</th>
             </tr>
         </thead>
         <tbody>
@@ -68,12 +64,10 @@
                     echo "<td>" . $row["name"] . "</td>";
                     echo "<td class='belt " . strtolower(str_replace(' ', '-', $row["belt_rank"])) . "'>" . $row["belt_rank"] . "</td>";
                     echo "<td>" . $row["age"] . "</td>";
-                    echo "<td>" . (isset($row["location"]) ? $row["location"] : "N/A") . "</td>";
-
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No results found</td></tr>";
+                echo "<tr><td colspan='4'>No results found</td></tr>";
             }
 
             $conn->close();
