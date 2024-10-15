@@ -9,6 +9,10 @@
 <body>
     <h1>BJJ Fighter Lineage</h1>
 
+    <!-- Search Bar -->
+    <label for="searchBar">Search Fighter:</label>
+    <input type="text" id="searchBar" onkeyup="searchFighter()" placeholder="Search by name...">
+
     <!-- Dropdown to filter by belt rank -->
     <label for="beltFilter">Filter by Belt Rank:</label>
     <select id="beltFilter" onchange="filterBelt()">
@@ -18,6 +22,13 @@
         <option value="Coral Belt">Coral Belt</option>
     </select>
 
+    <!-- Additional Filters -->
+    <label for="ageFilter">Filter by Age:</label>
+    <input type="number" id="ageFilter" placeholder="Enter age" onkeyup="filterByAge()">
+
+    <label for="locationFilter">Filter by Location:</label>
+    <input type="text" id="locationFilter" placeholder="Enter location" onkeyup="filterByLocation()">
+
     <!-- Table to display BJJ fighters -->
     <table id="fighterTable">
         <thead>
@@ -25,6 +36,8 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Belt Rank</th>
+                <th>Age</th>
+                <th>Location</th>
             </tr>
         </thead>
         <tbody>
@@ -54,10 +67,13 @@
                     echo "<td>" . $row["person_id"] . "</td>";
                     echo "<td>" . $row["name"] . "</td>";
                     echo "<td class='belt " . strtolower(str_replace(' ', '-', $row["belt_rank"])) . "'>" . $row["belt_rank"] . "</td>";
+                    echo "<td>" . $row["age"] . "</td>";
+                    echo "<td>" . (isset($row["location"]) ? $row["location"] : "N/A") . "</td>";
+
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='3'>No results found</td></tr>";
+                echo "<tr><td colspan='5'>No results found</td></tr>";
             }
 
             $conn->close();
