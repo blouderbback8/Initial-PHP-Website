@@ -83,7 +83,7 @@ CREATE TABLE Rounds (
 -- Insert BJJ fighters into People table
 INSERT INTO People (name, age, belt_rank, gender) VALUES
 ('Brian Ortega', 32, 'Black Belt', 'Male'),
-('Kron Gracie', 35, 'Black Belt', 'Male'),
+('Kron Gracie', 35, 'Brown Belt', 'Male'),
 ('Mackenzie Dern', 30, 'Black Belt', 'Female'),
 ('Rickson Gracie', 65, 'Red Belt', 'Male'),
 ('Helio Gracie', 95, 'Red Belt', 'Male'),
@@ -126,7 +126,7 @@ VALUES ('Andre Galvao', 41, 'Black Belt', 'Male');
 
 -- d. Updating a row (Updating belt rank for Kron Gracie)
 UPDATE People
-SET belt_rank = 'Black Belt&deg;'
+SET belt_rank = 'Black Belt'
 WHERE name = 'Kron Gracie';
 
 -- e. Deleting a row (Deleting Andre Galvao from People table)
