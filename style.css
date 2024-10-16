@@ -1,18 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1E90FF; /* BJJ blue */
+    background: linear-gradient(135deg, #1E90FF, #00008B); /* Gradient from BJJ blue to dark blue */
     text-align: center;
     color: #fff; /* White text */
 }
 
 h1 {
-    color: #FFD700; /* BJJ yellow */
+    background: linear-gradient(90deg, #FFD700, #FFA500); /* Gradient from yellow to orange */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+/* Center content container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 table {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    background: linear-gradient(135deg, #F0FFF0, #E6E6FA); /* Gradient for table background */
 }
 
 table, th, td {
@@ -25,22 +38,93 @@ th, td {
 }
 
 th {
-    background-color: #32CD32; /* Green headers */
+    background: linear-gradient(90deg, #32CD32, #228B22); /* Gradient from light green to dark green */
     color: #fff;
 }
 
-/* Corrected classes for belt colors */
+/* Corrected classes for belt colors with gradients */
 .belt-black-belt {
-    background-color: black;
+    background: linear-gradient(135deg, black, #333333); /* Gradient from black to dark gray */
     color: white;
 }
 
 .belt-red-belt {
-    background-color: red;
+    background: linear-gradient(135deg, red, #B22222); /* Gradient from red to dark red */
     color: white;
 }
 
 .belt-coral-belt {
-    background-color: coral;
+    background: linear-gradient(135deg, coral, #FF7F50); /* Gradient from coral to slightly darker coral */
     color: white;
+}
+
+/* Table row hover effect with gradient */
+table tbody tr:hover {
+    background: linear-gradient(90deg, rgba(50, 205, 50, 0.5), rgba(0, 128, 0, 0.5)); /* Light gradient on hover */
+}
+
+/* Button and input styles with gradient hover effect */
+input[type="text"], input[type="number"], select {
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #32CD32;
+    border-radius: 5px;
+    transition: background 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #F0FFF0, #E6E6FA); /* Gradient for input background */
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    background: linear-gradient(135deg, #F0FFF0, #98FB98); /* Gradient on focus */
+    box-shadow: 0 0 10px rgba(50, 205, 50, 0.5); /* Add glow effect on focus */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #32CD32, #228B22); /* Gradient button */
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #228B22, #006400); /* Darker gradient on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Additional styles for dropdown and search bar */
+#beltFilter, #searchBar, #ageFilter {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #32CD32;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #F0FFF0, #E6E6FA);
+    transition: background 0.3s;
+}
+
+#beltFilter:focus, #searchBar:focus, #ageFilter:focus {
+    background: linear-gradient(135deg, #F0FFF0, #98FB98);
+    box-shadow: 0 0 10px rgba(50, 205, 50, 0.5);
+}
+
+/* General link styling */
+a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #FFA500;
+}
+
+/* Adding subtle gradient background for labels */
+label {
+    display: inline-block;
+    margin: 10px;
+    background: linear-gradient(135deg, #32CD32, #228B22);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
