@@ -126,7 +126,7 @@ VALUES ('Andre Galvao', 41, 'Black Belt', 'Male');
 
 -- d. Updating a row (Updating belt rank for Kron Gracie)
 UPDATE People
-SET belt_rank = 'Coral Belt'
+SET belt_rank = 'Black Belt&deg;'
 WHERE name = 'Kron Gracie';
 
 -- e. Deleting a row (Deleting Andre Galvao from People table)
