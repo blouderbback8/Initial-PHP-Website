@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>BJJ Fighter Lineage</h1>
+    <h1>BJJ Fighter Database</h1>
 
     <!-- Search Bar -->
     <label for="searchBar">Search Fighter:</label>
