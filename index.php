@@ -15,7 +15,7 @@
 
     <!-- Dropdown to filter by belt rank -->
     <label for="beltFilter">Filter by Belt Rank:</label>
-    <select id="beltFilter" onchange="filterBelt()">
+    <select id="beltFilter" onchange="filterBelt()"> 
         <option value="all">All</option>
         <option value="Black Belt">Black Belt</option>
         <option value="Red Belt">Red Belt</option>
@@ -52,15 +52,15 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            // SQL query to fetch data from People table
-            $sql = "SELECT * FROM People";
+            // SQL query to fetch data from Fighters table
+            $sql = "SELECT * FROM Fighters";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 // Output data of each row with dynamic belt rank classes
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["person_id"] . "</td>";
+                    echo "<td>" . $row["fighter_id"] . "</td>";
                     echo "<td>" . $row["name"] . "</td>";
                     echo "<td class='belt " . strtolower(str_replace(' ', '-', $row["belt_rank"])) . "'>" . $row["belt_rank"] . "</td>";
                     echo "<td>" . $row["age"] . "</td>";

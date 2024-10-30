@@ -1,3 +1,4 @@
+/* Body styling */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1E90FF, #00008B); /* Gradient from BJJ blue to dark blue */
@@ -5,12 +6,21 @@ body {
     color: #fff; /* White text */
 }
 
+/* Header text styling */
 h1 {
     background: linear-gradient(90deg, #FFD700, #FFA500); /* Gradient from yellow to orange */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+a {
+
+    background: linear-gradient(90deg, #FFD700, #FFA500); /* Gradient from yellow to orange */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+}
+
+/* Table styling for the index page */
 table {
     width: 80%;
     margin: 20px auto;
@@ -78,4 +88,16 @@ button {
 
 button:hover {
     background: linear-gradient(90deg, #228B22, #006400); /* Darker gradient on hover */
+}
+
+/* Specific styling for email link on the contact page */
+.email-link {
+    font-size: 18px;
+    color: #FFD700;
+    text-decoration: underline;
+    margin: 20px;
+}
+
+.email-link:hover {
+    color: #FFA500;
 }

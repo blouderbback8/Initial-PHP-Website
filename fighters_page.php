@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="footer">Contact us at: info@bjjfightersystem.com</div>
 </body>
 </html>
-
+ 
 <?php
 $conn->close();
 ?>
