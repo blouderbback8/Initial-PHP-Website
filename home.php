@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Welcome to the BJJ Fighter Database</h1>
-    </div>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="site-title">BJJ Fighter NAME THIS PAGE</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Fighter Index</a></li>
+                <li><a href="about.php">About this site</a></li>
+                <li><a href="contacts.php">Contact Us</a></li>
+                <li><a href="fighters_page.php">Add Fighters</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="main-content">
         <section class="intro">
@@ -26,14 +36,6 @@
             </ul>
         </section>
 
-        <section class="quick-links">
-            <h2>Quick Links</h2>
-            <ul>
-                <li><a href="index.php">View Fighter Database</a></li>
-                <li><a href="fighters_page.php">Add New Fighter (fix this page)</a></li>
-                <!-- Add other links as needed -->
-            </ul>
-        </section>
     </div>
 
     <div class="footer">

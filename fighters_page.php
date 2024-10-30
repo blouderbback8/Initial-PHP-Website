@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Add new fighter to the database
+// Adding a new fighter
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fighter_name = $_POST['fighter_name'];
     $belt_rank = $_POST['belt_rank'];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('New fighter added successfully!');</script>";
     } else {
-        if ($conn->errno == 1062) { // Duplicate entry error code
+        if ($conn->errno == 1062) {
             echo "<script>alert('Error: Fighter with this name already exists.');</script>";
         } else {
             echo "Error: " . $conn->error;
@@ -37,22 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fighters Page</title>
+    <title>BJJ Fighter Database</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header Section with Navigation Links -->
-    <div class="header">
-        <h1>BJJ Fighter Database</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="fighters_page.php">Fighters</a></li>
-                <li><a href="about.php">About</a></li>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="site-title">Admin-only ADD FIGHTER HERE</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Fighter Index</a></li>
+                <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
+                <li><a href="fighters_page.php">Add Fighters</a></li>
             </ul>
         </nav>
-    </div>
+    </header>
 
     <!-- Main Content Section -->
     <div class="main">
@@ -75,34 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <style>
-        /* Basic styling for header and navigation */
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .header nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        .header nav ul li {
-            margin: 0 15px;
-        }
-        .header nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .header nav ul li a:hover {
-            text-decoration: underline;
-        }
-    </style>
-
-    <!-- Close the database connection -->
-    <?php $conn->close(); ?>
+    <div class="footer">
+        Contact us at: info@bjjtrackingsystem.com
+    </div>
 </body>
 </html>
