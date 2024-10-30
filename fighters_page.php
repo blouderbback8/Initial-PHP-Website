@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="footer">
-        Contact us at: info@bjjtrackingsystem.com
+        Contact us at: info@bjjtrackingsystem.example.com
     </div>
 </body>
 </html>

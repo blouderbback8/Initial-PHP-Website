@@ -32,7 +32,8 @@
         </section>
     </main>
 
-    <footer class="footer">         </a>
-    </footer>
+    <div class="footer">
+        Contact us at: info@bjjtrackingsystem.example.com
+    </div>
 </body>
 </html>

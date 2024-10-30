@@ -39,7 +39,7 @@
     </div>
 
     <div class="footer">
-       MAKE A GOOD FOOTER
+        Contact us at: info@bjjtrackingsystem.example.com
     </div>
 </body>
 </html>

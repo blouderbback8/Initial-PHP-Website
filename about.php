@@ -39,7 +39,7 @@
     </div>
 
     <div class="footer">
-        Contact us at: info@bjjfighterdatabase.com
+        Contact us at: info@bjjtrackingsystem.example.com
     </div>
 </body>
 </html>
