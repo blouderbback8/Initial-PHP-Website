@@ -6,8 +6,22 @@
     <title>BJJ Fighter Lineage</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+<div class="header">
     <h1>BJJ Fighter Database</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="fighters_page.php">Fighters</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="contacts.php">Contact Us</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+    
 
     <!-- Search Bar -->
     <label for="searchBar">Search Fighter:</label>

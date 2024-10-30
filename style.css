@@ -101,3 +101,64 @@ button:hover {
 .email-link:hover {
     color: #FFA500;
 }
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    color: #fff;
+}
+
+.header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.header nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Basic styling for the header */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.header nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.header nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header nav ul li a:hover {
+    text-decoration: underline;
+}
+
