@@ -9,14 +9,14 @@
 <body>
     <!-- Header Section -->
     <header class="header">
-        <h1 class="site-title">About this Website</h1>
+        <h1 class="site-title">BJJ Fighter Management</h1>
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="fighters_page.php">Add Fighters</a></li>
+                <li><a href="fighters_page.php">Manage Fighters</a></li>
             </ul>
         </nav>
     </header>
