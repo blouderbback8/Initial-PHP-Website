@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fighter_id'])) {
     $fighter_id = $_POST['fighter_id'];
     $sql = "DELETE FROM Fighters WHERE fighter_id = $fighter_id";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Fighter deleted successfully!');</script>";
+        echo "<script>alert('Fighter deleted successfully, this page shouldn't be showing up anymore check delete_fighter.php!');</script>";
     } else {
-        echo "Error deleting record: " . $conn->error;
+        echo "Error deleting record: Check delete_fighter.php " . $conn->error;
     }
 }
 
