@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="fighters_page.php">Manage Fighters (CRUDI)</a></li>
+                <li><a href="register.php">Create User</a></li>
             </ul>
         </nav>
     </header>
@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
             <input type="text" name="fighter_name" placeholder="Fighter Name" required>
             <select name="belt_rank" required>
                 <option value="">Select Belt Rank</option>
+                <!-- YES, I AM GOING TO FIX THE BELTS AFTER I SHOW OFF THE DYNAMIC TABLE  -->
                 <option value="white">White</option>
                 <option value="blue">Blue</option>
                 <option value="purple">Purple</option>

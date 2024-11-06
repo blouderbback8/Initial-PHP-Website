@@ -41,9 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
 
-                // Redirect or handle successful login
-                echo "<script>alert('Login successful!');</script>";
-                // You can redirect to a dashboard or another page, e.g., header("Location: dashboard.php");
+                // Set session variable for admin access
+                $_SESSION['is_admin'] = true;
+
+                     
+
+                // Redirect to the admin dashboard or desired page
+                header("Location: fighters_page.php");
+                exit();
             } else {
                 echo "<script>alert('Incorrect password.');</script>";
             }
