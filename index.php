@@ -10,7 +10,7 @@
 <body>
     <!-- Header Section -->
     <header class="header">
-        <h1 class="site-title">BJJ Fighter Management</h1>
+        <h1 class="site-title">BJJ Fighter Database</h1>
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
