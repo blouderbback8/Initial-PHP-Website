@@ -23,13 +23,12 @@
 
     <div class="main-content">
         <section class="overview">
-            <h2>Project Overview</h2>
-            <p>The BJJ Fighter Database is designed to help Brazilian Jiu-Jitsu practitioners and enthusiasts track fighter profiles, gym affiliations, belt ranks, and achievements in one centralized system.</p>
-        </section>
-
-        <section class="significance">
-            <h2>Significance</h2>
-            <p>This project offers a unique way for BJJ practitioners to view and manage data on fighters, making it easier to connect with gyms, find training partners, and observe progression within the sport. It's especially useful for students, instructors, and administrators in the BJJ community.</p>
+            <h2>Project Overview</h2> 
+            <!-- Video Embedding -->
+            <video width="800" controls>
+                <source src="About%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </section>
 
         <section class="credits">
