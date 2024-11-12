@@ -26,6 +26,16 @@
             <p>Explore comprehensive profiles, track belt ranks, and connect with gym affiliations in our BJJ Fighter Database.</p>
         </section>
 
+        <div class="main-content">
+        <section class="overview">
+            <h2>Project Overview</h2> 
+            <!-- Video Embedding -->
+            <video width="800" controls>
+                <source src="Home%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
         <section class="features">
             <h2>Features</h2>
             <ul>
