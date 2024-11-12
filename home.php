@@ -9,14 +9,14 @@
 <body>
     <!-- Header Section -->
     <header class="header">
-        <h1 class="site-title">BJJ Fighter Database</h1>
+        <h1 class="site-title">BJJ Fighter Tracker</h1>
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="login.php">ADMIN LOGIN</a></li>
+                <li><a href="login.php">Admin Login</a></li>
             </ul>
         </nav>
     </header>
@@ -28,7 +28,7 @@
 
         <div class="main-content">
         <section class="overview">
-            <h2>Project Overview</h2> 
+         
             <!-- Video Embedding -->
             <video width="800" controls>
                 <source src="Home%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">

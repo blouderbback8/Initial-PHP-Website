@@ -16,14 +16,19 @@
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="login.php">ADMIN LOGIN</a></li>
+                <li><a href="login.php">Admin Login</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-content">
-        <section class="contact-info">
-            <p>If you have any questions, suggestions, or issues, please feel free to reach out using the link below. We value your feedback and will get back to you as soon as possible.</p>
+    <section class="overview">
+           
+            <!-- Video Embedding -->
+            <video width="800" controls>
+                <source src="Contacts%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </section>
 
         <section class="contact-form">
