@@ -42,13 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role']; // Store the role (admin or user)
 
-                // Redirect based on role
-                if ($user['role'] === 'admin') {
-                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/fighters_page.php");
-                } else {
-                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
-                }
-                exit();
+// Redirect based on role
+if ($user['role'] === 'admin') {
+    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/admin.php");
+} else {
+    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
+}
+exit();
+
             } else {
                 echo "<script>alert('Incorrect password.');</script>";
             }
