@@ -1,8 +1,8 @@
 <?php 
-// Start session and check if the user is an admin
 session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
-    die("Access Denied!");
+    header("Location: login.php");
+    exit();
 }
 
 // Database connection
@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Index Page</a></li>
                 <li><a href="register.php">Create a New User</a></li>
             </ul>
         </nav>
