@@ -1,5 +1,13 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Redirect to login if not logged in
+    exit();
+}
+?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +30,12 @@
         </nav>
     </header>
 
-
-    
+        <!-- Logout Button Section -->
+        <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
 
     <!-- Search Bar -->
     <label for="searchBar">Search Fighter:</label>
@@ -31,7 +43,7 @@
 
     <!-- Dropdown to filter by belt rank -->
     <label for="beltFilter">Filter by Belt Rank:</label>
-    <select id="beltFilter" onchange="filterBelt()"> 
+    <select id="beltFilter" onchange="filterBelt()">
         <option value="all">All</option>
         <option value="Black Belt">Black Belt</option>
         <option value="Red Belt">Red Belt</option>
@@ -55,10 +67,10 @@
         <tbody>
             <?php
             // Database connection settings
-            $host = 'localhost';  
-            $dbname = 'bjj_lineage';  
-            $username = 'root';  
-            $password = '';  
+            $host = 'localhost';
+            $dbname = 'bjj_lineage';
+            $username = 'root';
+            $password = '';
 
             // Create connection
             $conn = new mysqli($host, $username, $password, $dbname);
@@ -93,4 +105,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

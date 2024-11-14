@@ -1,4 +1,10 @@
-<?php
+<?php 
+// Start session and check if the user is an admin
+session_start();
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
+    die("Access Denied!");
+}
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -6,7 +12,6 @@ $password = "";
 $dbname = "bjj_lineage";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -51,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BJJ Fighter Database</title>
+    <title>BJJ Fighter Management</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -62,40 +67,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="index.php">Fighter Index</a></li>
-                <li><a href="about.php">About this site</a></li>
-                <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="register.php">Admin</a></li>
+                <li><a href="register.php">Create a New User</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Add Fighter Form -->
-    <div class="fighter-form">
-        <h3>Add New Fighter Profile</h3>
-        <form action="" method="POST" onsubmit="return validateAge()">
-            <input type="hidden" name="add_fighter" value="1">
-            <input type="text" name="fighter_name" placeholder="Fighter Name" required>
-            <select name="belt_rank" required>
-                <option value="">Select Belt Rank</option>
-                <!-- YES, I AM GOING TO FIX THE BELTS AFTER I SHOW OFF THE DYNAMIC TABLE  -->
-                <option value="white">White</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-                <option value="brown">Brown</option>
-                <option value="black">Black</option>
-                <option value="Coral">Coral</option>
-                <option value="Red">Red</option>
-            </select>
-            <input type="text" id="ageInput" name="age" placeholder="Age" required>
-            <input type="text" name="gender" placeholder="Gender" required>
-            <input type="text" name="school_name" placeholder="School Name" required>
-            <button type="submit">Add Fighter</button>
-            <p id="ageError" style="color: red; display: none;">Please enter a valid number for age.</p>
+    <!-- Add Fighter Button to Open Modal -->
+    <div class="add-fighter-container">
+        <button onclick="openModal()" class="add-fighter-btn">Add New Fighter</button>
+    </div>
+
+    <!-- Modal for Adding Fighter -->
+    <div id="fighterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Add New Fighter Profile</h3>
+            <form action="" method="POST" onsubmit="return validateAge()" class="fighter-form">
+                <input type="hidden" name="add_fighter" value="1">
+                <input type="text" name="fighter_name" placeholder="Fighter Name" required>
+                <select name="belt_rank" required>
+                    <option value="">Select Belt Rank</option>
+                    <option value="white">White</option>
+                    <option value="blue">Blue</option>
+                    <option value="purple">Purple</option>
+                    <option value="brown">Brown</option>
+                    <option value="black">Black</option>
+                    <option value="Coral">Coral</option>
+                    <option value="Red">Red</option>
+                </select>
+                <input type="text" id="ageInput" name="age" placeholder="Age" required>
+                <input type="text" name="gender" placeholder="Gender" required>
+                <input type="text" name="school_name" placeholder="School Name" required>
+                <button type="submit">Add Fighter</button>
+                <p id="ageError" style="color: red; display: none;">Please enter a valid number for age.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Logout Button Section -->
+    <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
         </form>
     </div>
 
-    <!-- Fighter List with Editable Table -->
+    <!-- Fighter Profiles Table Section -->
     <div class="fighter-list">
         <h3>Fighter Profiles</h3>
         <table id="fighterTable">
@@ -118,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
 
                 $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
+                if ($result && $result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr data-id='" . $row['fighter_id'] . "'>";
                         echo "<td contenteditable='true' class='editable' data-field='name'>" . htmlspecialchars($row['name']) . "</td>";
@@ -143,9 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
         </table>
     </div>
 
-    <div class="footer">
+    <!-- Footer Section -->
+    <footer class="footer">
         Contact us at: info@bjjtrackingsystem.example.com
-    </div>
+    </footer>
 
     <script>
         function validateAge() {
@@ -160,6 +177,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
 
             ageError.style.display = 'none';
             return true;
+        }
+
+        function openModal() {
+            document.getElementById("fighterModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("fighterModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("fighterModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
 
         $(document).on('click', '.save-btn', function() {

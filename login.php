@@ -1,4 +1,4 @@
-<?php
+<?php 
 // Secure session settings
 ini_set('session.cookie_httponly', true);
 ini_set('session.cookie_secure', true);
@@ -35,19 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $user = $result->fetch_assoc();
             $hashedPassword = $user['password'];
 
-            // Verify the entered password with the stored hashed password
+            // Verify the password
             if (password_verify($password, $hashedPassword)) {
-                // Set session variables
+                // Set session variables, including role
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
+                $_SESSION['role'] = $user['role']; // Store the role (admin or user)
 
-                // Set session variable for admin access
-                $_SESSION['is_admin'] = true;
-
-                     
-
-                // Redirect to the admin dashboard or desired page
-                header("Location: fighters_page.php");
+                // Redirect based on role
+                if ($user['role'] === 'admin') {
+                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/fighters_page.php");
+                } else {
+                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
+                }
                 exit();
             } else {
                 echo "<script>alert('Incorrect password.');</script>";
@@ -64,8 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,40 +75,40 @@ $conn->close();
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
 </head>
 
-    <!-- Header Section -->
-    <header class="header">
-        <h1 class="site-title">Admin Login Page</h1>
-        <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="index.php">Fighter Index</a></li>
-                <li><a href="about.php">About this site</a></li>
-                <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="login.php">Admin Login</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Header Section -->
+<header class="header">
+    <h1 class="site-title">Login Page for the BJJ Fighter Tracker</h1>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="home.php">Home</a></li>
+            <li><a href="index.php">Fighter Index</a></li>
+            <li><a href="about.php">About this site</a></li>
+            <li><a href="contacts.php">Contact Us</a></li>
+            <li><a href="login.php">Login</a></li>
+        </ul>
+    </nav>
+</header>
 
-<body>
-    <div class="login-form">
-        <form action="login.php" method="POST">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit" name="login">Admin Login</button>
-        </form>
-    </div>
+<br>
+<div class="login-form">
+    <form action="login.php" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-   <!-- Video Embedding Section -->
-   <section class="overview">
-        <video width="800" controls>
-            <source src="Login%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" name="login">Login</button>
+    </form>
+</div>
+<br></br>
+<!-- Video Embedding Section -->
+<section class="overview">
+    <video width="800" controls>
+        <source src="Login%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
 
 </body>
 </html>

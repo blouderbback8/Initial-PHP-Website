@@ -1,8 +1,8 @@
 <?php
-// Secure session for admin access
+// Start session and check if the user is an admin
 session_start();
-if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
-    header("Location: login.php");
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
+    header("Location: fighters_page.php");
     exit();
 }
 
@@ -18,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Deleting a fighter with prepared statement
+// Deleting a fighter
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fighter_id'])) {
     $fighter_id = $_POST['fighter_id'];
     $sql = "DELETE FROM Fighters WHERE fighter_id = ?";
