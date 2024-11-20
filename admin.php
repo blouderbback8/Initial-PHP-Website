@@ -73,16 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
         </nav>
     </header>
 
-    <!-- Add Fighter Button to Open Modal -->
-    <div class="add-fighter-container">
-        <button onclick="openModal()" class="add-fighter-btn">Add New Fighter</button>
-    </div>
-
     <!-- Modal for Adding Fighter -->
     <div id="fighterModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Add New Fighter Profile</h3>
+            <span class="close" onclick="closeModal()"></span>
             <form action="" method="POST" onsubmit="return validateAge()" class="fighter-form">
                 <input type="hidden" name="add_fighter" value="1">
                 <input type="text" name="fighter_name" placeholder="Fighter Name" required>

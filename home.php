@@ -74,22 +74,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - BJJ Fighter Database</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        function openModal() {
-            document.getElementById("signUpModal").style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById("signUpModal").style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            var modal = document.getElementById("signUpModal");
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
+    
 </head>
 <body>
     <!-- Header Section -->
@@ -97,45 +82,15 @@ $conn->close();
         <h1 class="site-title">BJJ Fighter Tracker</h1>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="admin.php">Login</a></li>
+                <li><a href="admin.php">Admin</a></li>
             </ul>
         </nav>
     </header>
-
-    
-        <!-- Sign Up Button -->
-        <button onclick="openModal()">Sign Up</button>
-    </div>
-
-    <!-- Modal Structure for Sign-Up -->
-    <div id="signUpModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()"></span>
-            <h2>Create an Account</h2>
-            <form method="POST" action="home.php">
-                <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" required>
-
-                <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-
-                <button type="submit" name="register">Create Account</button>
-            </form>
-        </div>
-    </div>
-
     <div class="main-content">
-        
+   
         <div class="main-content">
         <section class="overview">
             <video width="800" controls>
