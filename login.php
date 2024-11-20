@@ -22,14 +22,8 @@
 
     <!-- Login/Signup Section -->
     <div class="wrapper">
-        <div class="title-text">
-            <div class="title login">Login Form</div>
-            <div class="title signup">Signup Form</div>
-        </div>
         <div class="form-container">
             <div class="slide-controls">
-                <input type="radio" name="slide" id="login" checked>
-                <input type="radio" name="slide" id="signup">
                 <label for="login" class="slide login">Login</label>
                 <label for="signup" class="slide signup">Signup</label>
                 <div class="slider-tab"></div>
@@ -45,11 +39,11 @@
                         <label>Password</label>
                         <input type="password" name="password" placeholder="Password" required>
                     </div>
-                    <div class="pass-link"><a href="#">Forgot password?</a></div>
+                    <div class="pass-link"><a href="#"></a></div>
                     <div class="field btn">
                         <input type="submit" name="login" value="Login">
                     </div>
-                    <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+                    <div class="signup-link"><a href="#"></a></div>
                 </form>
                 <!-- Signup Form -->
                 <form action="home.php" method="POST" class="signup">
