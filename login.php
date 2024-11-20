@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Secure session settings
 ini_set('session.cookie_httponly', true);
 ini_set('session.cookie_secure', true);
@@ -16,6 +16,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+$error_message = "";
 
 // Process login form
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
@@ -40,32 +42,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 // Set session variables, including role
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['role'] = $user['role']; // Store the role (admin or user)
+                $_SESSION['role'] = $user['role'];
 
-// Redirect based on role
-if ($user['role'] === 'admin') {
-    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/admin.php");
-} else {
-    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
-}
-exit();
-
+                // Redirect based on role
+                if ($user['role'] === 'admin') {
+                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/admin.php");
+                } else {
+                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
+                }
+                exit();
             } else {
-                echo "<script>alert('Incorrect password.');</script>";
+                $error_message = "Incorrect password. Please try again.";
             }
         } else {
-            echo "<script>alert('Email not found.');</script>";
+            $error_message = "Email not found. Please try again.";
         }
         $stmt->close();
     } else {
-        echo "<script>alert('Error preparing select statement: " . $conn->error . "');</script>";
+        $error_message = "Error preparing statement. Please try again.";
     }
 }
 
 $conn->close();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,40 +75,47 @@ $conn->close();
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
 </head>
 
-<!-- Header Section -->
-<header class="header">
-    <h1 class="site-title">Login Page for the BJJ Fighter Tracker</h1>
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li><a href="home.php">Home</a></li>
-            <li><a href="index.php">Fighter Index</a></li>
-            <li><a href="about.php">About this site</a></li>
-            <li><a href="contacts.php">Contact Us</a></li>
-            <li><a href="login.php">Login</a></li>
-        </ul>
-    </nav>
-</header>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="site-title">Login Page for the BJJ Fighter Tracker</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Fighter Index</a></li>
+                <li><a href="about.php">About this site</a></li>
+                <li><a href="contacts.php">Contact Us</a></li>
+                <li><a href="login.php">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<br>
-<div class="login-form">
-    <form action="login.php" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <br>
+    <div class="login-form">
+        <!-- Display error message if it exists -->
+        <?php if (!empty($error_message)): ?>
+            <p class="error-message"><?php echo htmlspecialchars($error_message); ?></p>
+        <?php endif; ?>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <form action="login.php" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <button type="submit" name="login">Login</button>
-    </form>
-</div>
-<br></br>
-<!-- Video Embedding Section -->
-<section class="overview">
-    <video width="800" controls>
-        <source src="Login%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</section>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" name="login">Login</button>
+        </form>
+    </div>
+    <br><br>
+
+    <!-- Video Embedding Section -->
+    <section class="overview">
+        <video width="800" controls>
+            <source src="Login%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
 
 </body>
 </html>
