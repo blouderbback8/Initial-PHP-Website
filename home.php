@@ -114,7 +114,7 @@ $conn->close();
     <!-- Modal Structure for Sign-Up -->
     <div id="signUpModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()"></span>
             <h2>Create an Account</h2>
             <form method="POST" action="home.php">
                 <label for="first_name">First Name:</label>

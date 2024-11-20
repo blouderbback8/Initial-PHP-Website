@@ -1,10 +1,96 @@
+<?php
+// Start a secure session
+session_start();
+ini_set('session.cookie_httponly', true);
+ini_set('session.cookie_secure', false); // Change to true in production with HTTPS
+ini_set('session.use_only_cookies', true);
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bjj_lineage";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Process login form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+    $email = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
+
+    $sql = "SELECT * FROM Users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows === 1) {
+            $user = $result->fetch_assoc();
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['role'] = $user['role'];
+
+                if ($user['role'] === 'admin') {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: index.php");
+                }
+                exit();
+            } else {
+                echo "<script>alert('Incorrect password. Please try again.');</script>";
+            }
+        } else {
+            echo "<script>alert('No account found with that email address.');</script>";
+        }
+        $stmt->close();
+    }
+}
+
+// Process signup form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+    $first_name = $_POST['first_name'] ?? null;
+    $last_name = $_POST['last_name'] ?? null;
+    $email = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
+
+    if ($first_name && $last_name && $email && $password) {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $sql = "INSERT INTO Users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, 'user')";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashedPassword);
+            if ($stmt->execute()) {
+                echo "<script>alert('Signup successful! You can now log in.');</script>";
+            } else {
+                echo "<script>alert('Error: Unable to create account. Email might already be in use.');</script>";
+            }
+            $stmt->close();
+        }
+    } else {
+        echo "<script>alert('Please fill in all fields.');</script>";
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - BJJ Fighter Database</title>
+    <title>Login / Signup</title>
     <link rel="stylesheet" href="style.css">
+    <script src="auth.js" defer></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -12,10 +98,7 @@
         <h1 class="site-title">BJJ Fighter Tracker</h1>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="about.php">About this site</a></li>
-                <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="admin.php">Login</a></li>
+                <li><a href="login.php">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -32,35 +115,27 @@
                 <!-- Login Form -->
                 <form action="login.php" method="POST" class="login">
                     <div class="field">
-                        <label>Email Address</label>
-                        <input type="text" name="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="field">
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="Password" required>
-                    </div>
-                    <div class="pass-link"><a href="#"></a></div>
-                    <div class="field btn">
-                        <input type="submit" name="login" value="Login">
-                    </div>
-                    <div class="signup-link"><a href="#"></a></div>
-                </form>
-                <!-- Signup Form -->
-                <form action="home.php" method="POST" class="signup">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" placeholder="First Name" required>
-                    </div>
-                    <div class="field">
-                        <label>Last Name</label>
-                        <input type="text" name="last_name" placeholder="Last Name" required>
-                    </div>
-                    <div class="field">
-                        <label>Email Address</label>
                         <input type="email" name="email" placeholder="Email Address" required>
                     </div>
                     <div class="field">
-                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="field btn">
+                        <input type="submit" name="login" value="Login">
+                    </div>
+                </form>
+                <!-- Signup Form -->
+                <form action="login.php" method="POST" class="signup">
+                    <div class="field">
+                        <input type="text" name="first_name" placeholder="First Name" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" name="last_name" placeholder="Last Name" required>
+                    </div>
+                    <div class="field">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="field">
                         <input type="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="field btn">
@@ -70,18 +145,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Video Section -->
-    <div class="main-content">
-        <section class="overview">
-            <video width="800" controls>
-                <source src="Home%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </section>
-    </div>
-
-    <!-- Include JS -->
-    <script src="auth.js"></script>
 </body>
 </html>
