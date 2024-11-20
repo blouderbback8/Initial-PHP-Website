@@ -1,121 +1,93 @@
-<?php
-// Secure session settings
-ini_set('session.cookie_httponly', true);
-ini_set('session.cookie_secure', true);
-ini_set('session.use_only_cookies', true);
-session_start();
-
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bjj_lineage";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$error_message = "";
-
-// Process login form
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-    $email = $_POST['email'] ?? null;
-    $password = $_POST['password'] ?? null;
-
-    // Retrieve the user with the given email
-    $sql = "SELECT * FROM Users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt) {
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result && $result->num_rows === 1) {
-            $user = $result->fetch_assoc();
-            $hashedPassword = $user['password'];
-
-            // Verify the password
-            if (password_verify($password, $hashedPassword)) {
-                // Set session variables, including role
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['role'] = $user['role'];
-
-                // Redirect based on role
-                if ($user['role'] === 'admin') {
-                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/admin.php");
-                } else {
-                    header("Location: http://localhost/BJJ_Repo/Initial-PHP-Website/index.php");
-                }
-                exit();
-            } else {
-                $error_message = "Incorrect password. Please try again.";
-            }
-        } else {
-            $error_message = "Email not found. Please try again.";
-        }
-        $stmt->close();
-    } else {
-        $error_message = "Error preparing statement. Please try again.";
-    }
-}
-
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <title>Home - BJJ Fighter Database</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <!-- Header Section -->
     <header class="header">
-        <h1 class="site-title">Login Page for the BJJ Fighter Tracker</h1>
+        <h1 class="site-title">BJJ Fighter Tracker</h1>
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="login.php">Login</a></li>
+                <li><a href="admin.php">Login</a></li>
             </ul>
         </nav>
     </header>
 
-    <br>
-    <div class="login-form">
-        <!-- Display error message if it exists -->
-        <?php if (!empty($error_message)): ?>
-            <p class="error-message"><?php echo htmlspecialchars($error_message); ?></p>
-        <?php endif; ?>
-
-        <form action="login.php" method="POST">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit" name="login">Login</button>
-        </form>
+    <!-- Login/Signup Section -->
+    <div class="wrapper">
+        <div class="title-text">
+            <div class="title login">Login Form</div>
+            <div class="title signup">Signup Form</div>
+        </div>
+        <div class="form-container">
+            <div class="slide-controls">
+                <input type="radio" name="slide" id="login" checked>
+                <input type="radio" name="slide" id="signup">
+                <label for="login" class="slide login">Login</label>
+                <label for="signup" class="slide signup">Signup</label>
+                <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+                <!-- Login Form -->
+                <form action="login.php" method="POST" class="login">
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="text" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="pass-link"><a href="#">Forgot password?</a></div>
+                    <div class="field btn">
+                        <input type="submit" name="login" value="Login">
+                    </div>
+                    <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+                </form>
+                <!-- Signup Form -->
+                <form action="home.php" method="POST" class="signup">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" placeholder="First Name" required>
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" placeholder="Last Name" required>
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="field btn">
+                        <input type="submit" name="register" value="Signup">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <br><br>
 
-    <!-- Video Embedding Section -->
-    <section class="overview">
-        <video width="800" controls>
-            <source src="Login%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
+    <!-- Video Section -->
+    <div class="main-content">
+        <section class="overview">
+            <video width="800" controls>
+                <source src="Home%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+    </div>
 
+    <!-- Include JS -->
+    <script src="auth.js"></script>
 </body>
 </html>

@@ -44,237 +44,40 @@ body {
     color: #FFA500;
 }
 
-/* Header and link gradient text */
-h1, a {
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Table styling */
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 15px;
-    text-align: center;
-    font-size: 1em;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-th {
-    background: linear-gradient(90deg, #32CD32, #228B22);
-    color: #fff;
-    font-weight: bold;
-}
-
-table tbody tr:hover {
-    background-color: rgba(50, 205, 50, 0.2);
-}
-
-/* Belt color classes */
-.belt-black-belt {
-    background: linear-gradient(135deg, black, #333);
-    color: white;
-}
-
-.belt-red-belt {
-    background: linear-gradient(135deg, red, #B22222);
-    color: white;
-}
-
-.belt-coral-belt {
-    background: linear-gradient(135deg, coral, #FF7F50);
-    color: white;
-}
-
-/* Button and input styling */
-input[type="text"], input[type="number"], select {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #32CD32;
-    border-radius: 5px;
-    transition: background 0.3s;
-    width: 180px;
-    font-size: 1em;
-}
-
-input:focus, select:focus {
-    background: linear-gradient(135deg, #F0FFF0, #98FB98);
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: linear-gradient(90deg, #32CD32, #228B22);
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background: linear-gradient(90deg, #228B22, #006400);
-    transform: scale(1.05);
-}
-
-/* Contact page email link styling */
-.email-link {
-    font-size: 18px;
-    color: #FFD700;
-    text-decoration: underline;
-    margin: 20px;
-    transition: color 0.3s;
-}
-
-.email-link:hover {
-    color: #FFA500;
-}
-
-/* Footer styling */
-.footer {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-}
-
-/* Modal overlay background */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    z-index: 1000; /* High z-index to appear above other elements */
-}
-
-/* Modal overlay background */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    z-index: 1000; /* High z-index to appear above other elements */
-}
-
-/* Modal content box */
-.modal-content {
-    position: relative;
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 50%;
-    max-width: 600px;
-    text-align: center;
-    color: #333;
-    border: 4px solid #4CAF50; /* Thicker green border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Close button styling */
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Modal styling */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 50%;
-    max-width: 500px;
-    text-align: center;
-    color: #333;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.close:hover {
-    color: #000;
-}
-
-.error-message {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
+/* Wrapper and Text Styles for Login/Signup */
 .wrapper {
-    max-width: 450px;
-    margin: auto;
+    max-width: 400px; /* Adjusted width */
+    margin: 40px auto; /* Add top margin for spacing */
     padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #ccc; /* Optional border for better visibility */
 }
 
+/* Title text alignment */
 .title-text {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Add spacing */
+    color: #000; /* Fix text color */
 }
 
-.form-container {
-    position: relative;
-    width: 100%;
-}
-
+/* Form Styles */
 .form-inner {
     display: flex;
-    transition: margin 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    width: 200%;
+    transition: margin-left 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .form-inner form {
-    width: 100%;
-    margin: 0 auto;
+    width: 50%;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .field {
@@ -284,9 +87,156 @@ button:hover {
 .field input {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px; /* Slightly smaller font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
 }
 
-.btn-layer {
-    background: linear-gradient(90deg, #4CAF50, #32CD32);
+.field.btn input {
+    background: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+.field.btn input:hover {
+    background: #005bb5;
+    transform: scale(1.05);
+}
+
+/* Slide Controls */
+.slide-controls {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 5px;
+    background: #f9f9f9;
+    border-radius: 15px;
+}
+
+.slide-controls label {
+    width: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    font-size: 14px;
+}
+
+.slide-controls .login {
+    background: #0073e6;
+    color: white;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.slide-controls .signup {
+    background: transparent;
+    color: #0073e6;
+}
+
+#signup:checked ~ .slide-controls .login {
+    background: transparent;
+    color: #0073e6;
+}
+
+#signup:checked ~ .slide-controls .signup {
+    background: #0073e6;
+    color: white;
+}
+
+/* Fix for the slider-tab */
+.slider-tab {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    background: #0073e6;
+    border-radius: 15px;
+    left: 0;
+    top: 0;
+    transition: all 0.6s ease-in-out;
+    z-index: -1;
+}
+
+#signup:checked ~ .slider-tab {
+    left: 50%;
+}
+
+/* Video Section */
+.video-section {
+    margin-top: 30px;
+}
+
+video {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+}
+
+/* General fixes for overlapping issues */
+.modal, .wrapper {
+    z-index: 1;
+}
+
+body {
+    overflow: auto; /* Ensure scrolling works */
+}
+
+/* TABLE CSS */
+
+/* Table styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white; /* Restore table background */
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1em;
+    border: 1px solid #ddd; /* Add table borders */
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+    color: #333; /* Restore text color */
+}
+
+th {
+    background: linear-gradient(90deg, #32CD32, #228B22);
+    color: #fff;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: rgba(240, 240, 240, 0.8); /* Add alternating row colors */
+}
+
+table tbody tr:hover {
+    background-color: rgba(50, 205, 50, 0.2); /* Highlight row on hover */
+}
+
+/* Action buttons */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #32CD32, #228B22);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #228B22, #006400);
+    transform: scale(1.05); /* Slight hover effect */
 }

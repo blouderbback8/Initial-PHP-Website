@@ -6,12 +6,12 @@ const signupBtn = document.querySelector("label.signup");
 const signupLink = document.querySelector("form .signup-link a");
 
 signupBtn.onclick = () => {
-    loginForm.style.marginLeft = "-50%";
-    loginText.style.marginLeft = "-50%";
+    document.querySelector(".form-inner").style.marginLeft = "-100%";
+    loginText.style.marginLeft = "-100%";
 };
 
 loginBtn.onclick = () => {
-    loginForm.style.marginLeft = "0%";
+    document.querySelector(".form-inner").style.marginLeft = "0%";
     loginText.style.marginLeft = "0%";
 };
 
