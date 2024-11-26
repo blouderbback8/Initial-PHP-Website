@@ -5,6 +5,10 @@ ini_set('session.cookie_httponly', true);
 ini_set('session.cookie_secure', false); // Change to true in production with HTTPS
 ini_set('session.use_only_cookies', true);
 
+// Initialize variables for messages
+$error = '';
+$success = '';
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -37,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
+                // Redirect based on role
                 if ($user['role'] === 'admin') {
                     header("Location: admin.php");
                 } else {
@@ -44,10 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 }
                 exit();
             } else {
-                echo "<script>alert('Incorrect password. Please try again.');</script>";
+                $error = "Incorrect password. Please try again.";
             }
         } else {
-            echo "<script>alert('No account found with that email address.');</script>";
+            $error = "No account found with that email address.";
         }
         $stmt->close();
     }
@@ -69,14 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         if ($stmt) {
             $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashedPassword);
             if ($stmt->execute()) {
-                echo "<script>alert('Signup successful! You can now log in.');</script>";
+                $success = "Signup successful! You can now log in.";
             } else {
-                echo "<script>alert('Error: Unable to create account. Email might already be in use.');</script>";
+                $error = "Error: Unable to create account. Email might already be in use.";
             }
             $stmt->close();
         }
     } else {
-        echo "<script>alert('Please fill in all fields.');</script>";
+        $error = "Please fill in all fields.";
     }
 }
 
@@ -98,13 +103,21 @@ $conn->close();
         <h1 class="site-title">BJJ Fighter Tracker</h1>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="login.php">Login</a></li>
+                <li><a href="home.php">Home</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Login/Signup Section -->
     <div class="wrapper">
+        <!-- Display error/success messages -->
+        <?php if (!empty($error)): ?>
+            <p class="error-message"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+        <?php if (!empty($success)): ?>
+            <p class="success-message"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
+
         <div class="form-container">
             <div class="slide-controls">
                 <label for="login" class="slide login">Login</label>

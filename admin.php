@@ -73,6 +73,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
         </nav>
     </header>
 
+        <!-- Logout Button Section -->
+        <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
     <!-- Modal for Adding Fighter -->
     <div id="fighterModal" class="modal">
         <div class="modal-content">
@@ -97,13 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
                 <p id="ageError" style="color: red; display: none;">Please enter a valid number for age.</p>
             </form>
         </div>
-    </div>
-
-    <!-- Logout Button Section -->
-    <div class="logout-button-container">
-        <form action="logout.php" method="POST">
-            <button type="submit" class="logout-btn">Logout</button>
-        </form>
     </div>
 
     <!-- Fighter Profiles Table Section -->

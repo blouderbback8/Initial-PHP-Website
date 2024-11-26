@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,12 +23,17 @@ if (!isset($_SESSION['user_id'])) {
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Fighter Index</a></li>
-                <li><a href="about.php">About this site</a></li>
                 <li><a href="contacts.php">Contact Us</a></li>
-                <li><a href="login.php">Login</a></li>
+                <li><a href="admin.php">Admin</a></li>
             </ul>
         </nav>
     </header>
+        <!-- Logout Button Section -->
+        <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
 
     <div class="main-content">
         <section class="overview">

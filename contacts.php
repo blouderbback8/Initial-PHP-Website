@@ -25,9 +25,16 @@ if (!isset($_SESSION['user_id'])) {
                 <li><a href="index.php">Fighter Index</a></li>
                 <li><a href="about.php">About this site</a></li>
                 <li><a href="admin.php">Admin</a></li>
+                
             </ul>
         </nav>
     </header>
+        <!-- Logout Button Section -->
+        <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
 
     <main class="main-content">
         <section class="overview">
@@ -45,6 +52,7 @@ if (!isset($_SESSION['user_id'])) {
                 href="mailto:ft1louderback3@gmail.com?subject=Contact%20Us&body=Please%20include%20your%20name,%20email,%20and%20message.">Email
                 Us</a>
         </section>
+        
     </main>
 </body>
 

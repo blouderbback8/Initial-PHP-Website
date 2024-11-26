@@ -1,6 +1,10 @@
 <?php
 // Start session
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Redirect to login if not logged in
+    exit();
+}
 
 // Database connection
 $servername = "localhost";
@@ -74,7 +78,6 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - BJJ Fighter Database</title>
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <!-- Header Section -->
@@ -89,15 +92,19 @@ $conn->close();
             </ul>
         </nav>
     </header>
+        <!-- Logout Button Section -->
+        <div class="logout-button-container">
+        <form action="logout.php" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
     <div class="main-content">
-   
-        <div class="main-content">
         <section class="overview">
             <video width="800" controls>
                 <source src="Home%20Page%20Maya%20-%20Gym%20Move.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </section>
-
+    </div>
 </body>
 </html>
