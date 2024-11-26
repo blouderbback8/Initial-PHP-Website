@@ -1,87 +1,80 @@
 USE bjj_lineage;
 
--- Temporarily disable foreign key checks to delete data without constraint issues
+-- Disable foreign key checks
 SET FOREIGN_KEY_CHECKS = 0;
 
--- Delete existing tables to avoid duplication and recreate them without duplicates
-DROP TABLE IF EXISTS Rounds;
-DROP TABLE IF EXISTS Instructions;
-DROP TABLE IF EXISTS MembershipAffiliation;
+-- Drop tables if they exist
+DROP TABLE IF EXISTS Instructors;
+DROP TABLE IF EXISTS fighter_affiliations;
 DROP TABLE IF EXISTS Schools;
-DROP TABLE IF EXISTS People;
+DROP TABLE IF EXISTS Fighters;
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Tournaments;
+DROP TABLE IF EXISTS BJJ_Tournaments;
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Create Users table
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user'
 );
 
--- Create People table (BJJ fighters and instructors)
-CREATE TABLE People (
-    person_id INT AUTO_INCREMENT PRIMARY KEY,
+-- Insert default admin user with hashed password
+INSERT INTO Users (first_name, last_name, email, password, role) VALUES
+('Default', 'Admin', 'admin@example.com', '$2y$10$rNyQMh9DRzaTn7EE5R0RBupKLmH1hR.Xko/Gtg0496fmGetFTPT3K', 'admin');
+
+
+-- Create Fighters table
+CREATE TABLE IF NOT EXISTS Fighters (
+    fighter_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
     age INT,
     belt_rank VARCHAR(50),
     gender VARCHAR(10)
 );
 
--- Create Schools table (BJJ schools)
-CREATE TABLE Schools (
+-- Create Schools table
+CREATE TABLE IF NOT EXISTS Schools (
     school_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     location VARCHAR(100)
 );
 
--- Create MembershipAffiliation table (Links People to Schools)
-CREATE TABLE MembershipAffiliation (
-    membership_id INT AUTO_INCREMENT PRIMARY KEY,
-    person_id INT,
+-- Create fighter_affiliations table without foreign keys
+CREATE TABLE IF NOT EXISTS fighter_affiliations (
+    affiliation_id INT AUTO_INCREMENT PRIMARY KEY,
+    fighter_id INT,
     school_id INT,
     join_date DATE,
-    FOREIGN KEY (person_id) REFERENCES People(person_id),
-    FOREIGN KEY (school_id) REFERENCES Schools(school_id)
+    FOREIGN KEY (fighter_id) REFERENCES Fighters(fighter_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (school_id) REFERENCES Schools(school_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create Tournaments table (BJJ tournaments)
-CREATE TABLE Tournaments (
+-- Create BJJ_Tournaments table
+CREATE TABLE IF NOT EXISTS BJJ_Tournaments (
     tournament_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     location VARCHAR(100) NOT NULL,
     date DATE NOT NULL
 );
 
--- Create Instructions table (Links Teachers to Students)
-CREATE TABLE Instructions (
-    instruction_id INT AUTO_INCREMENT PRIMARY KEY,
+-- Create Instructors table without foreign keys
+CREATE TABLE IF NOT EXISTS Instructors (
+    instructor_id INT AUTO_INCREMENT PRIMARY KEY,
     teacher_id INT,
     student_id INT,
     date DATE,
-    FOREIGN KEY (teacher_id) REFERENCES People(person_id),
-    FOREIGN KEY (student_id) REFERENCES People(person_id)
+    FOREIGN KEY (teacher_id) REFERENCES Fighters(fighter_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES Fighters(fighter_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create Rounds table (Tracks Rounds Between People in Tournaments)
-CREATE TABLE Rounds (
-    round_id INT AUTO_INCREMENT PRIMARY KEY,
-    person1_id INT,
-    person2_id INT,
-    tournament_id INT,
-    round_date DATE,
-    FOREIGN KEY (person1_id) REFERENCES People(person_id),
-    FOREIGN KEY (person2_id) REFERENCES People(person_id),
-    FOREIGN KEY (tournament_id) REFERENCES Tournaments(tournament_id)
-);
-
--- Insert BJJ fighters into People table
-INSERT INTO People (name, age, belt_rank, gender) VALUES
+-- Insert sample data into Fighters table
+INSERT INTO Fighters (name, age, belt_rank, gender) VALUES
 ('Brian Ortega', 32, 'Black Belt', 'Male'),
 ('Kron Gracie', 35, 'Brown Belt', 'Male'),
 ('Mackenzie Dern', 30, 'Black Belt', 'Female'),
@@ -89,68 +82,36 @@ INSERT INTO People (name, age, belt_rank, gender) VALUES
 ('Helio Gracie', 95, 'Red Belt', 'Male'),
 ('Gordon Ryan', 28, 'Black Belt', 'Male');
 
--- Insert BJJ schools into Schools table
+-- Insert sample data into Schools table
 INSERT INTO Schools (name, location) VALUES
 ('Gracie Academy', 'Rio de Janeiro, Brazil'),
 ('10th Planet Jiu-Jitsu', 'Los Angeles, USA'),
 ('Alliance Jiu-Jitsu', 'Sao Paulo, Brazil');
 
--- Insert membership affiliations into MembershipAffiliation table (Links People to Schools)
-INSERT INTO MembershipAffiliation (person_id, school_id, join_date) VALUES
-(1, 1, '2010-01-01'), -- Brian Ortega joins Gracie Academy
-(2, 1, '2005-01-01'), -- Kron Gracie joins Gracie Academy
-(3, 2, '2012-06-15'), -- Mackenzie Dern joins 10th Planet
-(4, 1, '1980-01-01'), -- Rickson Gracie joins Gracie Academy
-(6, 3, '2018-03-10'); -- Gordon Ryan joins Alliance Jiu-Jitsu
+-- Insert sample data into fighter_affiliations table
+INSERT INTO fighter_affiliations (fighter_id, school_id, join_date) VALUES
+(1, 1, '2010-01-01'),
+(2, 1, '2005-01-01'),
+(3, 2, '2012-06-15'),
+(4, 1, '1980-01-01'),
+(6, 3, '2018-03-10');
 
--- Insert teacher-student relationships into Instructions table (Links Teachers to Students)
-INSERT INTO Instructions (teacher_id, student_id, date) VALUES
-(4, 1, '2010-01-01'), -- Rickson Gracie teaches Brian Ortega
-(4, 2, '2005-01-01'), -- Rickson Gracie teaches Kron Gracie
-(5, 4, '1980-01-01'); -- Helio Gracie teaches Rickson Gracie
+-- Insert sample data into Instructors table
+INSERT INTO Instructors (teacher_id, student_id, date) VALUES
+(4, 1, '2010-01-01'),
+(4, 2, '2005-01-01'),
+(5, 4, '1980-01-01');
 
--- Insert BJJ tournaments into Tournaments table
-INSERT INTO Tournaments (name, location, date) VALUES
+-- Insert sample data into BJJ_Tournaments table
+INSERT INTO BJJ_Tournaments (name, location, date) VALUES
 ('IBJJF World Championship', 'Los Angeles, USA', '2023-06-15'),
 ('UFC 264', 'Las Vegas, USA', '2021-07-10'),
 ('ADCC 2022', 'Abu Dhabi, UAE', '2022-09-18');
 
--- Insert rounds (matches between fighters) into Rounds table
-INSERT INTO Rounds (person1_id, person2_id, tournament_id, round_date) VALUES
-(1, 2, 1, '2023-06-15'), -- Brian Ortega vs. Kron Gracie in IBJJF World Championship
-(6, 3, 2, '2021-07-10'); -- Gordon Ryan vs. Mackenzie Dern in UFC 264
-
--- c. Inserting a row into a table (Adding a new person to People table)
-INSERT INTO People (name, age, belt_rank, gender) 
-VALUES ('Andre Galvao', 41, 'Black Belt', 'Male');
-
--- d. Updating a row (Updating belt rank for Kron Gracie)
-UPDATE People
-SET belt_rank = 'Black Belt'
-WHERE name = 'Kron Gracie';
-
--- e. Deleting a row (Deleting Andre Galvao from People table)
-DELETE FROM People WHERE name = 'Andre Galvao';
-
--- a. Selecting data from one table
-SELECT * FROM People;
-
--- b. Selecting data from two or more tables using a JOIN condition
-SELECT People.name, Schools.name AS school_name, MembershipAffiliation.join_date
-FROM People
-JOIN MembershipAffiliation ON People.person_id = MembershipAffiliation.person_id
-JOIN Schools ON MembershipAffiliation.school_id = Schools.school_id;
-
--- Display the updated People table after INSERT
-SELECT * FROM People;
-
--- Display the updated People table after UPDATE
-SELECT * FROM People;
-
--- Display the updated People table after DELETE
-SELECT * FROM People;
-
--- Display data after modifications to verify correctness
-SELECT * FROM MembershipAffiliation;
-SELECT * FROM Rounds;
-SELECT * FROM Tournaments;
+-- Verify data in grid tables
+SELECT * FROM Users;
+SELECT * FROM Fighters;
+SELECT * FROM Schools;
+SELECT * FROM fighter_affiliations;
+SELECT * FROM BJJ_Tournaments;
+SELECT * FROM Instructors;
