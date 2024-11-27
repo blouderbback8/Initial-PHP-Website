@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_fighter'])) {
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Index Page</a></li>
+                <li><a href="about.php">About this site</a></li>
                 <li><a href="register.php">Create a New User</a></li>
             </ul>
         </nav>
