@@ -44,17 +44,8 @@ if (!isset($_SESSION['user_id'])) {
                 Your browser does not support the video tag.
             </video>
         </section>
-
-        <section class="credits">
-            <h2>Credits</h2>
-            <p>This project was created as part of the IS330 Databases and Data Analysis course. Special thanks to any
-                mentors, instructors, or resources that provided guidance during the project development.</p>
-        </section>
     </div>
 
-    <div class="footer">
-        Contact us at: info@bjjtrackingsystem.example.com
-    </div>
 </body>
 
 </html>
