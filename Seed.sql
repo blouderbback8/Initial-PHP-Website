@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 -- Insert default admin user with hashed password
 INSERT INTO Users (first_name, last_name, email, password, role) VALUES
-('Default', 'Admin', 'admin@example.com', '$2y$10$rNyQMh9DRzaTn7EE5R0RBupKLmH1hR.Xko/Gtg0496fmGetFTPT3K', 'admin');
+('Default', 'Admin', 'admin@example.com', '$2y$10$awfsJspTiENaBYot35wr4.ZYiyix3axslUjs62efqaIK1o11FDdWu', 'admin');
 
 
 -- Create Fighters table
